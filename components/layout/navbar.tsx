@@ -1,6 +1,6 @@
 'use client';
 
-import { Search, Bell, User, Settings } from 'lucide-react';
+import { Search, Bell, User, Settings, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -18,9 +18,11 @@ import { useRouter } from 'next/navigation';
 interface NavbarProps {
   searchQuery: string;
   onSearchChange: (query: string) => void;
+  onMenuClick?: () => void;
+  onProfileClick?: () => void;
 }
 
-export function Navbar({ searchQuery, onSearchChange }: NavbarProps) {
+export function Navbar({ searchQuery, onSearchChange, onMenuClick, onProfileClick }: NavbarProps) {
   const router = useRouter();
 
   const handleLogout = () => {
@@ -30,19 +32,29 @@ export function Navbar({ searchQuery, onSearchChange }: NavbarProps) {
   };
 
   return (
-    <header className="bg-background border-b border-border px-6 py-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <h1 className="text-2xl font-bold">NourishNet</h1>
+    <header className="bg-background border-b border-border px-4 sm:px-6 py-4">
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          {/* Mobile Menu Button */}
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="lg:hidden"
+            onClick={onMenuClick}
+          >
+            <Menu className="h-5 w-5" />
+          </Button>
+          
+          <h1 className="text-xl sm:text-2xl font-bold">NourishNet</h1>
         </div>
 
-        <div className="flex items-center space-x-4">
-          {/* Search */}
-          <div className="relative">
+        <div className="flex items-center gap-2 sm:gap-4">
+          {/* Search - Hidden on mobile */}
+          <div className="relative hidden md:block">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
             <Input
               placeholder="Search orders, customers..."
-              className="pl-10 w-80"
+              className="pl-10 w-60 lg:w-80"
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
             />
@@ -88,21 +100,21 @@ export function Navbar({ searchQuery, onSearchChange }: NavbarProps) {
           {/* User Profile */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="flex items-center space-x-2">
+              <Button variant="ghost" size="sm" className="flex items-center gap-2">
                 <div className="w-8 h-8 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center">
                   <User className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
                 </div>
-                <span className="text-sm font-medium">Admin</span>
+                <span className="text-sm font-medium hidden sm:inline">Admin</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={onProfileClick}>
                 <Settings className="mr-2 h-4 w-4" />
                 Settings
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={onProfileClick}>
                 <User className="mr-2 h-4 w-4" />
                 Profile
               </DropdownMenuItem>
@@ -113,6 +125,17 @@ export function Navbar({ searchQuery, onSearchChange }: NavbarProps) {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
+      </div>
+      
+      {/* Mobile Search */}
+      <div className="relative md:hidden mt-4">
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+        <Input
+          placeholder="Search..."
+          className="pl-10 w-full"
+          value={searchQuery}
+          onChange={(e) => onSearchChange(e.target.value)}
+        />
       </div>
     </header>
   );
