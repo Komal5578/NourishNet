@@ -80,6 +80,15 @@ export default function LoginPage() {
               {loading ? 'Signing in...' : 'Sign In'}
             </Button>
           </form>
+          
+          {/* Demo Credentials */}
+          <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded">
+            <p className="text-sm font-medium text-blue-900 dark:text-blue-300 mb-2">Demo Credentials:</p>
+            <div className="space-y-1 text-sm text-blue-800 dark:text-blue-400">
+              <p><span className="font-semibold">Email:</span> {ALLOWED_EMAIL}</p>
+              <p><span className="font-semibold">Password:</span> {ALLOWED_PASSWORD}</p>
+            </div>
+          </div>
         </CardContent>
       </Card>
     </div>
