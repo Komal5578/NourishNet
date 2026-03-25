@@ -1,6 +1,9 @@
+"use client";
+
 import React from "react";
+import ShinyText from "./ShinyText";
 import Lottie from "lottie-react";
-import chefAnimation from "../data/chef-making-pizza.json";
+import chefAnimation from "../public/data/chef-making-pizza.json";
 import { useRouter } from "next/navigation";
 
 export default function LandingPage() {
@@ -8,7 +11,7 @@ export default function LandingPage() {
 
   return (
     <main className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      
+
       {/* Background Video */}
       <video
         autoPlay
@@ -17,7 +20,7 @@ export default function LandingPage() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
-        <source src="/data/bg-video.mp4" type="video/mp4" />
+       <source src="/data/bg-video.mp4" type="video/mp4" />
       </video>
 
       {/* Dark overlay for readability */}
@@ -25,21 +28,33 @@ export default function LandingPage() {
 
       {/* Content */}
       <div className="relative z-20 w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 p-6">
-        
+
         {/* Left Side: Text */}
         <div className="flex-1 flex flex-col items-start text-left">
-          <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-6 drop-shadow-lg">
-            NourishNet
+          <h1 className="text-5xl md:text-6xl font-extrabold mb-10 drop-shadow-lg">
+            <ShinyText
+              text="NourishNet"
+              speed={2}
+              color="#0a2240" // dark blue
+              shineColor="#48bfe3"
+              spread={120}
+              className="inline-block"
+            />
           </h1>
-          <p className="text-lg md:text-2xl text-white/80 mb-8 max-w-lg drop-shadow">
-            Discover delicious recipes, connect with chefs, and nourish your
-            culinary creativity!
+          <p className="text-lg md:text-2xl text-white/80 mb-12 max-w-lg drop-shadow">
+            A modern B2B website for managing tiffin (meal box) delivery services
             <br />
             <span className="font-semibold text-primary">NourishNet</span> is
             your all-in-one platform for food inspiration, planning, and more.
           </p>
           <button
-            className="px-8 py-3 rounded-lg bg-primary text-white text-lg font-semibold shadow-lg hover:bg-primary/90 transition"
+            className="px-8 py-3 rounded-lg text-white text-lg font-semibold shadow-lg transition"
+            style={{
+              backgroundColor: '#0a2240',
+              border: 'none',
+            }}
+            onMouseOver={e => (e.currentTarget.style.backgroundColor = '#143968')}
+            onMouseOut={e => (e.currentTarget.style.backgroundColor = '#0a2240')}
             onClick={() => router.push("/login")}
           >
             Get Started
@@ -54,7 +69,7 @@ export default function LandingPage() {
               width: "clamp(280px, 40vw, 384px)",
               height: "clamp(280px, 40vw, 384px)",
               borderRadius: "50%",
-              overflow: "hidden",  // ← clips Lottie to the circle
+              overflow: "hidden",
             }}
           >
             <Lottie
@@ -62,7 +77,6 @@ export default function LandingPage() {
               loop={true}
               style={{
                 position: "absolute",
-                // Adjust these to pan/zoom the animation within the circle
                 width: "140%",
                 height: "140%",
                 top: "50%",
