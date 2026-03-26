@@ -11,7 +11,6 @@ export default function LandingPage() {
 
   return (
     <main className="relative min-h-screen flex items-center justify-center overflow-hidden">
-
       {/* Background Video */}
       <video
         autoPlay
@@ -20,41 +19,36 @@ export default function LandingPage() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
-       <source src="/data/bg-video.mp4" type="video/mp4" />
+        <source src="/data/bg-video.mp4" type="video/mp4" />
       </video>
 
       {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-black/50 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/20 z-10" />
 
       {/* Content */}
       <div className="relative z-20 w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 p-6">
-
         {/* Left Side: Text */}
         <div className="flex-1 flex flex-col items-start text-left">
           <h1 className="text-5xl md:text-6xl font-extrabold mb-10 drop-shadow-lg">
             <ShinyText
               text="NourishNet"
               speed={2}
-              color="#0a2240" // dark blue
+              color="#ffffff"
               shineColor="#48bfe3"
               spread={120}
-              className="inline-block"
+              className="text-white"
             />
           </h1>
           <p className="text-lg md:text-2xl text-white/80 mb-12 max-w-lg drop-shadow">
-            A modern B2B website for managing tiffin (meal box) delivery services
+            A modern B2B website for managing tiffin (meal box) delivery
+            services
             <br />
             <span className="font-semibold text-primary">NourishNet</span> is
             your all-in-one platform for food inspiration, planning, and more.
           </p>
           <button
-            className="px-8 py-3 rounded-lg text-white text-lg font-semibold shadow-lg transition"
-            style={{
-              backgroundColor: '#0a2240',
-              border: 'none',
-            }}
-            onMouseOver={e => (e.currentTarget.style.backgroundColor = '#143968')}
-            onMouseOut={e => (e.currentTarget.style.backgroundColor = '#0a2240')}
+            className="px-8 py-3 rounded-lg text-white text-lg font-semibold shadow-lg 
+  bg-[#0a2240] hover:bg-[#143968] hover:scale-105 transition-all duration-300"
             onClick={() => router.push("/login")}
           >
             Get Started
