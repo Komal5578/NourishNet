@@ -26,7 +26,7 @@ export default function LoginPage() {
       if (email === ALLOWED_EMAIL && password === ALLOWED_PASSWORD) {
         localStorage.setItem('isAuthenticated', 'true');
         localStorage.setItem('userEmail', email);
-        router.push('/');
+        router.push('/dashboard');
       } else {
         setError('Invalid email or password');
       }
